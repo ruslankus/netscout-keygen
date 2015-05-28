@@ -42,7 +42,7 @@ class KeysController extends Controller
 	public function actionForm()
 	{
 	    $model=new Keys;
-
+        $flashMessage = '';
 
 	    if(isset($_POST['Keys']))
 	    {
@@ -66,7 +66,7 @@ class KeysController extends Controller
 	    								'Light Edition' => array('code' => 'NET02-01LGT0100-00003', 'name' => 'Light Edition limited to 100 Users'),
 	    								'Standart Edition' => array('code' => 'NET02-01STD0100-00006', 'name' => 'Standard Edition limited to 100 Users'),
 	    								'Profession Edition' => array('code' => 'NET02-01PRF0100-00009', 'name' => 'Professional Edition limited to 100 Users'),
-                                        'Corporate Edition ' => array('code' => 'NET02-01PRF1000-00010', 'name' => 'Professional Сorporate Unlimited Edition')
+                                        //'Corporate Edition ' => array('code' => 'NET02-01PRF1000-00010', 'name' => 'Professional Сorporate Unlimited Edition')
 	    							)
 	    				);
 
@@ -132,6 +132,7 @@ class KeysController extends Controller
 				$connection = Yii::app()->db;
 				$command=$connection->createCommand($sql);
 				$res = $command->execute();
+
                 if($res){
                     Yii::app()->user->setFlash('message','Nubers was generated');
                 }
@@ -146,18 +147,20 @@ class KeysController extends Controller
 				MULTIPLE insert End
 	        */
 
-			if($error)
+			if(!empty($error))
 			{
 				$mess = "ERROR";
 			}
 			else
 			{
 				$mess = "Generated OK";
+
 			}
-			$this->render('form',array('model'=>$model, 'mess' => $mess));		    
+            $flashMessage = Yii::app()->user->getFlash('message');
+			$this->render('form',array('model'=>$model, 'mess' => $mess, 'flash' => $flashMessage));
 	    }
 	    else{
-	    	$this->render('form',array('model'=>$model,'mess'=>''));	
+	    	$this->render('form',array('model'=>$model,'mess'=>'', 'flash' => $flashMessage));
 	    }
 	    
 	}
