@@ -80,8 +80,8 @@ class KeysController extends Controller
 	        /*
 				SINGLE insert 
 	        */    
-			/*
-		    for ($x = 50; $x > 0; $x--) // generates keys array
+			
+		    for ($x = 54; $x > 0; $x--) // generates keys array
 		    {
 
 				$model -> key = $this -> generateKey($model);
@@ -99,7 +99,7 @@ class KeysController extends Controller
 		        }
 
 		    }
-			*/		        
+				        
 	        /*
 				SINGLE insert End
 	        */
@@ -107,12 +107,12 @@ class KeysController extends Controller
 
 	        /*
 				MULTIPLE insert 
-	        */
+	        
 			
 	        if($model->validate())
 	        {
 	    		$arrKeys = array();
-			    for ($x = 50; $x > 0; $x--) // generates keys array
+			    for ($x = 54; $x > 0; $x--) // generates keys array
 			    {
 			    	$arrKeys[] = $this -> generateKey($model); 
 			    }
