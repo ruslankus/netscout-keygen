@@ -65,7 +65,8 @@ class KeysController extends Controller
 	    							(
 	    								'Light Edition' => array('code' => 'NET02-01LGT0100-00003', 'name' => 'Light Edition limited to 100 Users'),
 	    								'Standart Edition' => array('code' => 'NET02-01STD0100-00006', 'name' => 'Standard Edition limited to 100 Users'),
-	    								'Profession Edition' => array('code' => 'NET02-01PRF0100-00009', 'name' => 'Professional Edition limited to 100 Users')
+	    								'Profession Edition' => array('code' => 'NET02-01PRF0100-00009', 'name' => 'Professional Edition limited to 100 Users'),
+                                        'Corporate Edition ' => array('code' => 'NET02-01PRF1000-00010', 'name' => 'Professional Сorporate Unlimited Edition')
 	    							)
 	    				);
 
@@ -130,7 +131,11 @@ class KeysController extends Controller
 		    	$sql = "INSERT INTO keys (key, vendor, limit_user, edition) VALUES ".$values;
 				$connection = Yii::app()->db;
 				$command=$connection->createCommand($sql);
-				$command->execute();
+				$res = $command->execute();
+                if($res){
+                    Yii::app()->user->setFlash('message','Nubers was generated');
+                }
+
 	        }
 	        else
 	        {
